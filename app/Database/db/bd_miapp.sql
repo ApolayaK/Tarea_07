@@ -1,0 +1,19 @@
+-- Base de datos: miapp
+DROP DATABASE IF EXISTS miapp;
+CREATE DATABASE IF NOT EXISTS miapp;
+USE miapp;
+
+
+-- Tabla: usuarios
+CREATE TABLE usuarios (
+  id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  usuario VARCHAR(100) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  avatar VARCHAR(255) DEFAULT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+);
+
+SELECT * FROM usuarios;
+
+DELETE FROM usuarios WHERE nomusuario != 'demo';

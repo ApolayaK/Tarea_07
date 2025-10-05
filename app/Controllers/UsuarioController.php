@@ -27,13 +27,31 @@ class UsuarioController extends BaseController
         $nomusuario = $this->request->getPost('nomusuario');
         $claveacceso = $this->request->getPost('claveacceso');
 
+        // Validar nombre completo
+        if (strlen($nombres) < 3) {
+            $session->setFlashdata('error_registro', 'El nombre completo debe tener al menos 3 caracteres');
+            return redirect()->to(base_url('/registro'));
+        }
+
+        // Validar nombre de usuario
+        if (strlen($nomusuario) < 4) {
+            $session->setFlashdata('error_registro', 'El nombre de usuario debe tener al menos 4 caracteres');
+            return redirect()->to(base_url('/registro'));
+        }
+
+        // Validar contraseña (mínimo 6 caracteres)
+        if (strlen($claveacceso) < 6) {
+            $session->setFlashdata('error_registro', 'La contraseña debe tener al menos 6 caracteres');
+            return redirect()->to(base_url('/registro'));
+        }
+
         // Validar que el usuario no exista
         if ($usuario->existeUsuario($nomusuario)) {
             $session->setFlashdata('error_registro', 'El nombre de usuario ya existe');
             return redirect()->to(base_url('/registro'));
         }
 
-        // Procesar imagen avatar (opcional)
+        // Imagen avatar
         $img_avatar = null;
         $file = $this->request->getFile('img_avatar');
 

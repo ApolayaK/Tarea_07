@@ -16,7 +16,7 @@ class Usuario extends Model
     protected $updatedField = 'update_at';
 
     /**
-     * Retorna el registro del usuario por nombre de usuario
+     * Retorna el registro del usuario por nombre de usuario (exacto, case-sensitive)
      */
     public function getUser($nomusuario = ''): array|object|null
     {
@@ -25,7 +25,7 @@ class Usuario extends Model
     }
 
     /**
-     * Verifica si un nombre de usuario ya existe
+     * Verifica si un nombre de usuario ya existe (exacto, case-sensitive)
      */
     public function existeUsuario($nomusuario = ''): bool
     {
